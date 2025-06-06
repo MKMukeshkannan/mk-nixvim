@@ -1,6 +1,6 @@
 {
   plugins.dashboard = {
-    enable = true;
+    enable = false;
     settings = {
       hide.tabline = true;
       theme = "hyper";

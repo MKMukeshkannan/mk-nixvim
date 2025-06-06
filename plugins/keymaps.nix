@@ -8,21 +8,8 @@
 
     vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {})
     vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {})
-
-    function execute_cmake_out()
-      local files = vim.fn.glob('./build/bin/*', false, true)  -- List files in build/bin
-      if #files > 0 then
-         local handle = io.popen(files[1])
-         local result = handle:read("*a")
-         handle:close()
-         print(result)
-      else
-         print("No files found in build/bin.")
-      end
-    end
   '';
   keymaps = [
-
     {
       mode = "n";
       key = "<leader>a";
@@ -63,21 +50,20 @@
       key = "<C-4>";
       action.__raw = "function() require'harpoon':list():select(4) end";
     }
-
     {
       action = "<cmd>:!command clang -std=c99 -Wall -Werror -fsanitize=address main.c -o main -g && ./main<CR>";
-      key = "<leader>cc";
+      key = "<C-S>";
     }
     {
-      action = "<cmd>:!command cmake -S . -B build && cmake --build build<CR>";
+      action = "<cmd>:CowpileAndRun<CR>";
       key = "<leader>c";
     }
     {
-      action = "<cmd>:!command cmake --preset conan-release && cmake --build ./build/Release/ && ./build/Release/src/machine_learning<CR>";
-      key = "<leader>C";
+      action = "<cmd>:CowpileAndRebuild<CR>";
+      key = "<leader>cc";
     }
     {
-      action = "<cmd>:lua execute_cmake_out()<CR>";
+      action = "<cmd>:CowpileAndRun<CR>";
       key = "<leader>r";
     }
     {

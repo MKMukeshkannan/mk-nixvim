@@ -2,6 +2,7 @@
 {
   imports = [
     ./lsp
+    ./cowpile.nix
     ./options.nix
     ./neotree.nix
     ./keymaps.nix
