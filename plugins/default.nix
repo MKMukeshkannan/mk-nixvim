@@ -2,6 +2,7 @@
 {
   imports = [
     ./lsp
+    ./icons.nix
     ./cowpile.nix
     ./options.nix
     ./neotree.nix
@@ -17,7 +18,6 @@
     ./align.nix
     ./harpoon.nix
     ./lualine.nix
-    ./hologram.nix
     # ./typr.nix
   ];
 

@@ -1,4 +1,4 @@
 { ... }:
 {
-  imports = [ ./ayu.nix ];
+  imports = [ ./makurai.nix ];
 }
