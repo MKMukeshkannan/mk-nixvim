@@ -8,9 +8,9 @@
       end
     '';
     settings.sources = [
+      { name = "nvim_lsp"; }
       { name = "render-markdown"; }
       { name = "luasnip"; }
-      { name = "nvim_lsp"; }
       { name = "path"; }
       { name = "buffer"; }
     ];

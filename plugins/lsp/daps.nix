@@ -22,29 +22,27 @@
       dapui.close()
     end
 
-    dap.adapters.codelldb = {
-      type = 'server',
-      port = "$\{port\}",
-      executable = {
-        command = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb", 
-        args = {"--port", "$\{port\}"},
-      }
-    }
-    dap.configurations.cpp = {
-      {
-        name = "Launch file",
-        type = "codelldb",
-        request = "launch",
-        host = "arm64",
-        program = function()
-          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-          end,
-        cwd = '\$\{workspaceFolder\}',
-        stopOnEntry = false,
-      },
-    }
-    dap.configurations.c = dap.configurations.cpp
-    dap.configurations.rust = dap.configurations.cpp
+    -- dap.adapters.lldb = {
+    --   type = 'executable',
+    --   command = "${pkgs.lldb}/bin/lldb-dap", 
+    --   name = 'lldb',
+    -- }
+
+    -- dap.configurations.cpp = {
+    --   {
+    --     name = 'Launch',
+    --     type = 'lldb',
+    --     request = 'launch',
+    --     program = function()
+    --       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    --     end,
+    --     cwd = '$\{workspaceFolder}',
+    --     stopOnEntry = false,
+    --     args = {},
+    --   },
+    -- }
+    -- dap.configurations.c = dap.configurations.cpp
+    -- dap.configurations.rust = dap.configurations.cpp
 
     vim.keymap.set('n', '<Leader>dt', function() dap.toggle_breakpoint() end)
     vim.keymap.set('n', '<Leader>db', function() dap.set_breakpoint() end)
@@ -59,5 +57,6 @@
     vim.fn.sign_define('DapLogPoint', { text='', texthl='DapLogPoint', linehl='DapLogPoint', numhl= 'DapLogPoint' })
     vim.fn.sign_define('DapStopped', { text='', texthl='DapStopped', linehl='DapStopped', numhl= 'DapStopped' })
   '';
-
+  plugins.dap-lldb.enable = true;
+  plugins.dap-lldb.settings.codelldb_path = "${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb";
 }
